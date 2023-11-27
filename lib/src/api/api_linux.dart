@@ -70,7 +70,7 @@ Future<String> installDesktopFileFromFile(File file,
   try {
     checkProcessStdErr(fileInstall);
   } catch (error) {
-    log('$error');
+    throw ('$error');
   }
 
   if (fileInstall.exitCode < 0) {
@@ -84,7 +84,7 @@ Future<String> installDesktopFileFromFile(File file,
   try {
     checkProcessStdErr(updateDatabase);
   } catch (error) {
-    log('$error');
+    throw ('$error');
   }
 
   if (updateDatabase.exitCode < 0) {

@@ -48,11 +48,13 @@ checkProcessStdErr(ProcessResult processResult) {
     if (errorMessageBytes.isNotEmpty) {
       throw Exception(String.fromCharCodes(errorMessageBytes));
     }
-  } else if (processResult.stderr is String) {
-    final errorMessageString = processResult.stderr.toString().trim();
+  } else if (processResult.stderr is String ||
+      processResult.stdout.toString().contains('Error')) {
+    final errorMessageString = processResult.stdout.toString().trim() +
+        processResult.stderr.toString().trim();
 
     if (errorMessageString.isNotEmpty) {
-      throw Exception(processResult.stderr);
+      throw Exception(errorMessageString);
     }
   }
 }
